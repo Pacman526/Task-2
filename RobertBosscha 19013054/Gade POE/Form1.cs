@@ -417,30 +417,17 @@ namespace Gade_POE
                     int y = rnd.Next(0, 20);
                     int team = rnd.Next(0, 2);
                     int buildingType = rnd.Next(0, 2);
-
-                    if (map[x, y] != '.')
-                    {
-                        for (int k = 0; k < 1000; k++)
-                        {
-                            x = rnd.Next(0, 20);
-                            y = rnd.Next(0, 20);
-
-                            if (map[x, y] == '.')
-                            {
-                                k = 1000;
-                            }
-                        }       
-                    }
+                    
 
                     if (buildingType == 0)
                     {
-                        ResourceBuilding B = new ResourceBuilding(x, y, 25, team, '0');
-                        map[x, y] = B.Symbol;
+                        ResourceBuilding B = new ResourceBuilding(x, y, 25, team, 'O');
+                        map[x, y] = B.Symbol ;
                         buildings[j] = B;
                     }
                     else if (buildingType == 1)
                     {
-                        FactoryBuilding B = new FactoryBuilding(x, y, 25, team, 'O');
+                        FactoryBuilding B = new FactoryBuilding(x, y, 25, team, 'F');
                         map[x, y] = B.Symbol;
                         buildings[j] = B;
                     }
@@ -622,7 +609,12 @@ namespace Gade_POE
             //CLASS CONSTRUCTOR
             public Building(int _xPos, int _yPos, int _HP, int _team, char _symbol)
             {
-                
+                xPos = _xPos;
+                yPos = _yPos;
+                HP = _HP;
+                team = _team;
+                symbol = _symbol;
+
             }
 
             //CLASS METHODS
