@@ -13,8 +13,6 @@ namespace Gade_POE
             public Map map;
             public int temp;
 
-            
-
             public void GameLogic(Unit[] units, Building [] buildings)
             {
 
@@ -65,7 +63,7 @@ namespace Gade_POE
                         string[] buildArr = buildingType.Split('.');
                         buildingType = buildArr[buildArr.Length - 1];
 
-                        if (buildingType == "Form1+ResourceBuilding")
+                        if (buildingType == "ResourceBuilding")
                         {
                             ResourceBuilding B = (ResourceBuilding)b;
 
@@ -84,7 +82,7 @@ namespace Gade_POE
                             
                         }
                         
-                        if (buildingType == "Form1+FactoryBuilding")
+                        if (buildingType == "FactoryBuilding")
                         {
                             FactoryBuilding B = (FactoryBuilding)b;
                             B.productionSpeed = 5;
@@ -94,10 +92,11 @@ namespace Gade_POE
                             }else
                             {
                                 decimal d = roundCheck;
-                                if ((d /B.productionSpeed) % 1 == 0)
+                                if ((d / B.productionSpeed) % 1 == 0)
                                 {
+                                    Unit u = B.SpawnUnit(B);
                                     Array.Resize(ref units, units.Length + 1);
-                                    units[units.Length -1] = B.SpawnUnit(); 
+                                    units[units.Length -1] = u; 
                                 }
                                 info += B.ToString(buildings, B);
                             }

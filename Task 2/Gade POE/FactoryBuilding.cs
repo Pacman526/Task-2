@@ -10,6 +10,7 @@ namespace Gade_POE
             public int unitType;
             public int productionSpeed;
             public int spawnPointX, spawnPointY;
+            Unit u;
 
             //CLASS CONSTRUCTOR
             public FactoryBuilding(int _xPos, int _yPos, int _HP, int _team, char _symbol) : base(_xPos, _yPos, _HP, _team, _symbol)
@@ -40,10 +41,13 @@ namespace Gade_POE
 
             }
 
-            public Unit SpawnUnit()
+            public Unit SpawnUnit(FactoryBuilding B)
             {
-                spawnPointX = xPos;
-                spawnPointY = YPos + 1;
+                spawnPointX = B.xPos;
+                spawnPointY = B.YPos + 1;
+    
+                Random rnd = new Random();
+                unitType = rnd.Next(0, 2);
 
                 if (spawnPointY > 19)
                 {
@@ -52,16 +56,18 @@ namespace Gade_POE
 
                 if (unitType == 0)
                 {
-                    Unit u = new Unit(spawnPointX, spawnPointY, 20, 1, 2, 1, Team, Convert.ToChar("M"), false, "MeleeUnit");
-                     return u;
+                    u = new Unit(spawnPointX, spawnPointY, 20, 1, 2, 1, Team, Convert.ToChar("M"), false, "MeleeUnit");
+                    
 
                 }
-                else if (unitType == 0)
+                else if (unitType == 1)
                 {
-                    Unit u = new Unit(spawnPointX, spawnPointY, 10, 1, 3, 5, Team, Convert.ToChar("R"), false, "RangedUnit");
-                    return u;
+                    u = new Unit(spawnPointX, spawnPointY, 10, 1, 3, 5, Team, Convert.ToChar("R"), false, "RangedUnit");
+                    
                 }
-                
+
+                return u;
+
             }
             public override string ToString(Building[] buildings, Building b)
             {
