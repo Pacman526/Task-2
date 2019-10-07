@@ -17,7 +17,7 @@ namespace Gade_POE
             {
                 
             }
-
+            //CLASS Accessors
             public int XPos { get => base.xPos; set => base.xPos = value; }
             public int YPos { get => base.yPos; set => base.yPos = value; }
             public int HP { get => base.HP; set =>base. HP = value; }
@@ -58,7 +58,6 @@ namespace Gade_POE
                 {
                     u = new Unit(spawnPointX, spawnPointY, 20, 1, 2, 1, Team, Convert.ToChar("M"), false, "MeleeUnit");
                     
-
                 }
                 else if (unitType == 1)
                 {
