@@ -315,13 +315,13 @@ namespace Gade_POE
 
                     if (buildingType == 0)
                     {
-                        ResourceBuilding B = new ResourceBuilding(x, y, 25, team, 'O');
+                        ResourceBuilding B = new ResourceBuilding(x, y, 100, team, 'O');
                         map[x, y] = B.Symbol ;
                         buildings[j] = B;
                     }
                     else if (buildingType == 1)
                     {
-                        FactoryBuilding B = new FactoryBuilding(x, y, 25, team, 'F');
+                        FactoryBuilding B = new FactoryBuilding(x, y, 100, team, 'F');
                         map[x, y] = B.Symbol;
                         buildings[j] = B;
                     }
@@ -427,7 +427,7 @@ namespace Gade_POE
                         string[] buildArr = buildingType.Split('.');
                         buildingType = buildArr[buildArr.Length - 1];
 
-                        if (buildingType == "ResourceBuilding")
+                        if (buildingType == "Form1+ResourceBuilding")
                         {
                             ResourceBuilding B = (ResourceBuilding)b;
 
@@ -446,7 +446,7 @@ namespace Gade_POE
                             
                         }
                         
-                        if (buildingType == "FactoryBuilding")
+                        if (buildingType == "Form1+FactoryBuilding")
                         {
                             FactoryBuilding B = (FactoryBuilding)b;
                             if (B.HP < 0)
@@ -454,6 +454,13 @@ namespace Gade_POE
                                 B.Death(B);
                             }else
                             {
+                                decimal d = roundCheck;
+                                if ((d /5) % 1 == 0)
+                                {
+                                    
+                                    Array.Resize(ref units, units.Length + 1);
+                                    units[units.Length -1] = B.SpawnUnit(); 
+                                }
                                 info += B.ToString(buildings, B);
                             }
                         }
@@ -611,9 +618,10 @@ namespace Gade_POE
             {
                 spawnPointX = xPos;
                 spawnPointY = YPos + 1;
+                
                 Unit u = new Unit(0, 0, 0, 0, 0, 0, 0, '0', false, "Unit");
 
-                if (spawnPointY > 20)
+                if (spawnPointY > 19)
                 {
                     spawnPointY -= 2; 
                 }
